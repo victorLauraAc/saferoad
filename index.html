@@ -10,26 +10,21 @@
   <body>
     <!-- HEADER -->
     <nav class="topheader">
-      <a href="#" class="logo">
-        <img src="img2/logo.png" alt="Safaroad Logo" height="80" />
-      </a>
-      <ul class="Menu-Horizontal">
-        <li><a href="#">Inicio</a></li>
-        <li><a href="#">Consulta</a></li>
-        <li><a href="#">Mapa</a></li>
-        <li><a href="#">Ayuda</a></li>
-        <li id="user-area">
-          <a href="login.html">
-            <img src="img2/logousuario.png" alt="Usuario" height="30" />
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <img src="img2/logocampana.png" alt="Notificaciones" height="30" />
-          </a>
-        </li>
-        <!-- Toggle removed from index (panel only on app.html) -->
-      </ul>
+        <div></div> <!-- Spacer for the grid -->
+        <a href="#" class="logo">
+            <img src="img2/logo.png" alt="Safaroad Logo" height="80" />
+        </a>
+        <ul class="Menu-Horizontal">
+            <li><a href="#">Inicio</a></li>
+            <li><a href="#">Consulta</a></li>
+            <li><a href="#">Mapa</a></li>
+            <li><a href="#">Ayuda</a></li>
+            <li id="user-area">
+                <a href="login.html">
+                    <img src="img2/logousuario.png" alt="Usuario" height="30" />
+                </a>
+            </li>
+        </ul>
     </nav>
 
     <!-- HERO -->
@@ -40,7 +35,7 @@
           Recibe alertas en tiempo real sobre huaycos, derrumbes y otras
           incidencias en la vía. Mantén a conductores y pasajeros seguros.
         </p>
-        <a href="login.html"><button class="cta-button">Saber más</button></a>
+        <button class="cta-button" id="saber-mas-btn">Saber más de SafeRoad</button>
       </div>
       <div class="hero-img">
         <img src="img2/hero.png" alt="Seguridad en carretera" />
@@ -85,7 +80,7 @@
     </section>
 
     <!-- DESTACADOS -->
-    <section class="seccion-destacados">
+    <section class="seccion-destacados centered-section">
       <h2>Accesos</h2>
       <div class="destacados-list">
         <a class="cta-button" href="app.html">Ir al panel</a>
@@ -105,11 +100,24 @@
       </form>
     </section>
 
+    <!-- MODAL SABER MÁS -->
+    <div id="saber-mas-modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
+      <div class="modal-content">
+        <button id="modal-close" class="close" aria-label="Cerrar">×</button>
+        <h2>Sobre SafeRoad</h2>
+        <p>SafeRoad es una plataforma dedicada a mejorar la seguridad en las carreteras de nuestro país. Nuestro objetivo es proporcionar información en tiempo real sobre incidentes como huaycos, derrumbes, y otros peligros para que los conductores puedan tomar decisiones informadas y viajar de manera más segura.</p>
+        <h3>Contacto</h3>
+        <p><strong>Correo:</strong> contacto@saferoad.pe</p>
+        <p><strong>Teléfono:</strong> +51 987 654 321</p>
+        <p><strong>Dirección:</strong> Av. Siempre Viva 123, Lima, Perú</p>
+      </div>
+    </div>
+
     <!-- SCRIPT -->
     <script>
       document.getElementById('demo-notification')?.addEventListener('click', ()=>{ const notes = JSON.parse(localStorage.getItem('safaroadNotifications')||'[]'); notes.unshift({ id: 'n_'+Math.random().toString(36).slice(2,8), text: 'Notificación de prueba', level: 'info', ts: Date.now() }); localStorage.setItem('safaroadNotifications', JSON.stringify(notes)); alert('Notificación simulada'); });
       document.getElementById('theme-toggle-index')?.addEventListener('click', ()=>{ const cur = localStorage.getItem('safaroadTheme')||'light'; const next = cur === 'light' ? 'dark':'light'; localStorage.setItem('safaroadTheme', next); document.documentElement.setAttribute('data-theme', next); });
-      // Mostrar nombre de usuario si está logueado
+      
       const user = localStorage.getItem("safaroadUser");
       const userArea = document.getElementById("user-area");
 
@@ -124,6 +132,28 @@
         if (e.target.id === "logout") {
           localStorage.removeItem("safaroadUser");
           window.location.href = "index.html";
+        }
+      });
+
+      // Modal logic
+      const saberMasBtn = document.getElementById('saber-mas-btn');
+      const saberMasModal = document.getElementById('saber-mas-modal');
+      const modalClose = document.getElementById('modal-close');
+
+      saberMasBtn.addEventListener('click', () => {
+        saberMasModal.style.display = 'flex';
+        saberMasModal.setAttribute('aria-hidden', 'false');
+      });
+
+      modalClose.addEventListener('click', () => {
+        saberMasModal.style.display = 'none';
+        saberMasModal.setAttribute('aria-hidden', 'true');
+      });
+
+      window.addEventListener('click', (event) => {
+        if (event.target == saberMasModal) {
+          saberMasModal.style.display = 'none';
+          saberMasModal.setAttribute('aria-hidden', 'true');
         }
       });
     </script>
