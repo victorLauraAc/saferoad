@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Perfil - Saferoad</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="main.js"></script>
+</head>
+<body>
+  <nav class="topheader">
+    <a href="index.html" class="logo"><img src="img2/logo.png" alt="Safaroad" height="60"></a>
+    <ul class="Menu-Horizontal">
+      <li><a href="app.html">Panel</a></li>
+      <li><a href="incidents.html">Incidentes</a></li>
+      <li><a href="chat.html">Chat</a></li>
+      <li><a href="admin.html">Admin</a></li>
+      <li id="user-area"><a href="login.html"><img src="img2/logousuario.png" alt="Usuario" height="30"/></a></li>
+      <!-- Toggle removed from profile page -->
+    </ul>
+  </nav>
+  <main class="container card">
+    <h1>Editar Perfil</h1>
+    <form id="profile-form">
+      <label for="profile-username">Usuario</label>
+      <input id="profile-username" readonly />
+      <label for="profile-email">Correo</label>
+      <input id="profile-email" type="email" />
+      <label for="profile-role">Rol</label>
+      <select id="profile-role">
+        <option value="usuario">Usuario</option>
+        <option value="conductor">Conductor</option>
+        <option value="admin">Administrador</option>
+      </select>
+      <div class="form-actions">
+        <button type="submit" class="cta-button">Guardar</button>
+      </div>
+    </form>
+  </main>
+</body>
+</html>

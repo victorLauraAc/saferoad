@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Saferoad</title>
     <link rel="stylesheet" href="styles.css" />
+    <script defer src="main.js"></script>
   </head>
   <body>
     <!-- HEADER -->
@@ -27,6 +28,7 @@
             <img src="img2/logocampana.png" alt="Notificaciones" height="30" />
           </a>
         </li>
+        <!-- Toggle removed from index (panel only on app.html) -->
       </ul>
     </nav>
 
@@ -82,6 +84,16 @@
       </div>
     </section>
 
+    <!-- DESTACADOS -->
+    <section class="seccion-destacados">
+      <h2>Accesos</h2>
+      <div class="destacados-list">
+        <a class="cta-button" href="app.html">Ir al panel</a>
+        <button class="cta-button" id="demo-notification">Simular notificación</button>
+        <button class="cta-button alt" id="theme-toggle-index">Modo oscuro</button>
+      </div>
+    </section>
+
     <!-- CONTACTO -->
     <section class="seccion-contacto">
       <h2>Contacto</h2>
@@ -95,6 +107,8 @@
 
     <!-- SCRIPT -->
     <script>
+      document.getElementById('demo-notification')?.addEventListener('click', ()=>{ const notes = JSON.parse(localStorage.getItem('safaroadNotifications')||'[]'); notes.unshift({ id: 'n_'+Math.random().toString(36).slice(2,8), text: 'Notificación de prueba', level: 'info', ts: Date.now() }); localStorage.setItem('safaroadNotifications', JSON.stringify(notes)); alert('Notificación simulada'); });
+      document.getElementById('theme-toggle-index')?.addEventListener('click', ()=>{ const cur = localStorage.getItem('safaroadTheme')||'light'; const next = cur === 'light' ? 'dark':'light'; localStorage.setItem('safaroadTheme', next); document.documentElement.setAttribute('data-theme', next); });
       // Mostrar nombre de usuario si está logueado
       const user = localStorage.getItem("safaroadUser");
       const userArea = document.getElementById("user-area");

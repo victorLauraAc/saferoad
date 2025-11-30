@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Safaroad App</title>
     <link rel="stylesheet" href="styles.css" />
+    <script defer src="main.js"></script>
   </head>
   <body>
     <!-- NAVBAR -->
     <nav class="topheader">
+      <button id="toggle-actions" class="toggle-actions left-toggle" aria-label="Mostrar/ocultar acciones">▶</button>
       <a href="#" class="logo">
         <img src="img2/logo.png" alt="Safaroad Logo" height="80" />
       </a>
@@ -18,6 +20,7 @@
         <li><a href="#">Mapa</a></li>
         <li><a href="#">Ayuda</a></li>
         <li id="user-area"></li>
+        <!-- Toggle is only present in app.html and has been moved to the left -->
       </ul>
     </nav>
 
@@ -33,11 +36,132 @@
       <div class="hero-img">
         <img src="img2/app-hero.png" alt="Panel Saferoad" />
       </div>
+      <div class="hero-cta" style="width:100%; text-align:center;">
+        <a href="incidents.html" class="cta-button">Explorar incidentes</a>
+        <a href="report.html" class="cta-button alt" style="margin-left:8px">Reportar ahora</a>
+      </div>
     </section>
+
+    <!-- DASHBOARD PRINCIPAL -->
+    <section class="container dashboard">
+      <h1>Panel</h1>
+      <p class="muted">Acceso rápido a las funciones principales. Usa el menú o las tarjetas para navegar.</p>
+      <div class="cards">
+        <a class="card-link card" href="incidents.html">
+          <h3>Incidentes</h3>
+          <p>Ver, filtrar y explorar incidentes registrados.</p>
+        </a>
+        <a class="card-link card" href="report.html">
+          <h3>Reportar</h3>
+          <p>Crear un nuevo reporte con fotos, audio y ubicación.</p>
+        </a>
+        <a class="card-link card" href="chat.html">
+          <h3>Chat</h3>
+          <p>Comunícate con otros conductores.</p>
+        </a>
+        <a class="card-link card" href="history.html">
+          <h3>Historial y estadísticas</h3>
+          <p>Ver tus reportes anteriores y estadísticas.</p>
+        </a>
+        <a class="card-link card" href="admin.html">
+          <h3>Administración</h3>
+          <p>Herramientas para moderadores y administradores.</p>
+        </a>
+        <a class="card-link card" href="profile.html">
+          <h3>Perfil</h3>
+          <p>Editar información de tu cuenta.</p>
+        </a>
+      </div>
+    </section>
+
+    <!-- El panel lateral ya no está integrado; use las páginas dedicadas: Chat, Admin, Historial -->
+
+    <!-- VENTANA DE NOTIFICACIONES -->
+    <div id="notifications" aria-live="polite" class="notifications"></div>
+
+    <!-- REPORTAR INCIDENTE (MODAL) -->
+    <div id="report-modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
+      <div class="modal-content">
+        <button id="modal-close" class="close" aria-label="Cerrar">×</button>
+        <h2>Reportar incidente</h2>
+        <form id="report-form">
+          <label for="type">Tipo de incidente</label>
+          <select id="type" required>
+            <option value="huayco">Huayco</option>
+            <option value="derrumbe">Derrumbe</option>
+            <option value="trafico">Tráfico</option>
+            <option value="otro">Otro</option>
+          </select>
+
+          <label for="severity">Severidad</label>
+          <select id="severity">
+            <option value="normal">Normal</option>
+            <option value="prioritario">Prioritario</option>
+          </select>
+
+          <label for="description">Descripción</label>
+          <textarea id="description" placeholder="Describe el incidente..." required></textarea>
+
+          <label for="photo">Adjuntar foto</label>
+          <input type="file" id="photo" accept="image/*" />
+          <div id="photo-preview"></div>
+
+          <label>Grabar audio</label>
+          <div class="audio-controls">
+            <button type="button" id="record-btn">Grabar</button>
+            <button type="button" id="stop-btn" disabled>Detener</button>
+            <audio id="audio-play" controls hidden></audio>
+          </div>
+
+          <label>Ubicación</label>
+          <div class="location-controls">
+            <button type="button" id="get-location">Obtener ubicación</button>
+            <input id="lat" placeholder="Lat" readonly />
+            <input id="lng" placeholder="Lng" readonly />
+          </div>
+
+          <div class="map" id="map" aria-label="Mapa de incidentes"></div>
+
+          <div class="form-actions">
+            <button type="submit" class="cta-button">Enviar reporte</button>
+            <button type="button" id="draft-btn" class="cta-button alt">Guardar borrador</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    
+    <!-- EDIT PROFILE MODAL -->
+    <div id="profile-modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
+      <div class="modal-content">
+        <button id="profile-close" class="close" aria-label="Cerrar">×</button>
+        <h2>Editar Perfil</h2>
+        <form id="profile-form">
+          <label for="profile-username">Usuario</label>
+          <input id="profile-username" readonly />
+          <label for="profile-email">Correo</label>
+          <input id="profile-email" type="email" />
+          <label for="profile-role">Rol</label>
+          <select id="profile-role"><option value="usuario">Usuario</option><option value="conductor">Conductor</option><option value="admin">Administrador</option></select>
+          <div class="form-actions">
+            <button type="submit" class="cta-button">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </div>
 
     <!-- SECCIÓN DE INCIDENTES -->
     <section class="seccion-incidentes">
       <h2>Alertas recientes</h2>
+      <div class="controls">
+        <input id="search" placeholder="Buscar incidentes..." aria-label="Buscar incidentes" />
+        <select id="filter-type">
+          <option value="all">Todos</option>
+          <option value="huayco">Huayco</option>
+          <option value="derrumbe">Derrumbe</option>
+          <option value="trafico">Tráfico</option>
+        </select>
+        <button id="filter-nearby" class="cta-button alt" title="Filtrar incidentes cercanos">Cercanos</button>
+      </div>
 
       <div class="incidente">
         <img src="img2/huayco.jpg" alt="Huayco" />
@@ -67,9 +191,23 @@
       </div>
 
       <div class="ver-mas">
-        <button class="cta-button">Ver más</button>
+        <button class="cta-button" id="load-more">Ver más</button>
       </div>
     </section>
+    
+    <!-- CARDS DINÁMICAS DE INCIDENTES -->
+    <section id="incident-list" class="incident-list"></section>
+    <!-- BOTÓN CHATBOT -->
+    <div id="chatbot" class="chatbot" aria-hidden="true">
+      <button id="chatbot-toggle" aria-label="Abrir chatbot">Chatbot</button>
+      <div class="chatbot-window" hidden>
+        <div class="bot-messages" role="log" aria-live="polite"></div>
+        <div class="bot-actions">
+          <button class="bot-suggestion">Quiero reportar</button>
+          <button class="bot-suggestion">¿Cómo funciona?</button>
+        </div>
+      </div>
+    </div>
 
     <script>
       const user = localStorage.getItem("safaroadUser");

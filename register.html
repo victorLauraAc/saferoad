@@ -9,22 +9,28 @@
   <body>
     <section class="seccion-contacto">
       <h2>Crear cuenta</h2>
-      <form id="register-form">
-        <input
-          type="text"
-          id="username"
-          placeholder="Nombre de usuario"
-          required
-        />
-        <input
-          type="password"
-          id="password"
-          placeholder="Contraseña"
-          required
-        />
+      <form id="register-form" aria-label="Formulario de registro">
+        <label for="username">Nombre de usuario</label>
+        <input type="text" id="username" placeholder="Nombre de usuario" required aria-required="true" />
+
+        <label for="password">Contraseña</label>
+        <input type="password" id="password" placeholder="Contraseña" required aria-required="true" />
+        <div id="password-strength" aria-hidden="true"></div>
+
+        <label for="role">Rol</label>
+        <select id="role">
+          <option value="usuario" selected>Usuario</option>
+          <option value="conductor">Conductor</option>
+          <option value="admin">Administrador</option>
+        </select>
+
+        <label for="email">Correo (opcional)</label>
+        <input type="email" id="email" placeholder="Correo electrónico" />
+
         <button type="submit">Registrarse</button>
         <p>¿Ya tienes una cuenta? <a href="login.html">Inicia sesión</a></p>
       </form>
+      <div id="register-feedback" aria-live="polite"></div>
     </section>
 
     <script>
@@ -32,17 +38,27 @@
         .getElementById("register-form")
         .addEventListener("submit", function (e) {
           e.preventDefault();
-          const user = document.getElementById("username").value.trim();
-          const pass = document.getElementById("password").value.trim();
+              const user = document.getElementById("username").value.trim();
+              const pass = document.getElementById("password").value.trim();
+              const role = document.getElementById('role').value;
+              const email = document.getElementById('email').value.trim();
 
-          if (localStorage.getItem(user)) {
-            alert("⚠️ Este usuario ya existe. Intenta con otro.");
-          } else {
-            localStorage.setItem(user, pass);
-            alert("✅ Registro exitoso. Ahora inicia sesión.");
-            window.location.href = "login.html";
-          }
+              const users = JSON.parse(localStorage.getItem('safaroadUsers') || '[]');
+              if (users.find(u => u.username === user)) {
+                document.getElementById('register-feedback').innerText = '⚠️ Este usuario ya existe. Intenta con otro.';
+                return;
+              }
+              if (pass.length < 6) { document.getElementById('register-feedback').innerText = '⚠️ La contraseña debe tener al menos 6 caracteres.'; return; }
+              users.push({ username: user, password: pass, role, email });
+              localStorage.setItem('safaroadUsers', JSON.stringify(users));
+              document.getElementById('register-feedback').innerText = '✅ Registro exitoso. Ahora inicia sesión.';
+              setTimeout(()=> window.location.href = 'login.html', 1000);
         });
+
+          // password strength
+          document.getElementById('password').addEventListener('input', (e)=>{
+            const val = e.target.value; const strength = val.length >= 8 ? 'Fuerte' : val.length >=6 ? 'Aceptable' : 'Débil'; document.getElementById('password-strength').innerText = 'Fortaleza: ' + strength;
+          });
     </script>
   </body>
 </html>

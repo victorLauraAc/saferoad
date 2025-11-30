@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reportar Incidente - Saferoad</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="main.js"></script>
+</head>
+<body>
+  <nav class="topheader">
+    <a href="index.html" class="logo"><img src="img2/logo.png" alt="Safaroad" height="60"></a>
+    <ul class="Menu-Horizontal">
+      <li><a href="app.html">Panel</a></li>
+      <li><a href="incidents.html">Incidentes</a></li>
+      <li><a href="chat.html">Chat</a></li>
+      <li><a href="admin.html">Admin</a></li>
+      <li id="user-area"><a href="login.html"><img src="img2/logousuario.png" alt="Usuario" height="30"/></a></li>
+      <!-- Toggle removed from report page -->
+    </ul>
+  </nav>
+  <main class="container card">
+    <h1>Reportar incidente</h1>
+    <p class="muted">Completa el formulario con datos precisos. Puedes añadir foto, audio y ubicación.</p>
+    <form id="report-form">
+      <label for="type">Tipo de incidente</label>
+      <select id="type" required>
+        <option value="huayco">Huayco</option>
+        <option value="derrumbe">Derrumbe</option>
+        <option value="trafico">Tráfico</option>
+        <option value="otro">Otro</option>
+      </select>
+
+      <label for="severity">Severidad</label>
+      <select id="severity">
+        <option value="normal">Normal</option>
+        <option value="prioritario">Prioritario</option>
+      </select>
+
+      <label for="description">Descripción</label>
+      <textarea id="description" placeholder="Describe el incidente..." required></textarea>
+
+      <label for="photo">Adjuntar foto</label>
+      <input type="file" id="photo" accept="image/*" />
+      <div id="photo-preview" class="preview"></div>
+
+      <label>Grabar audio</label>
+      <div class="audio-controls">
+        <button type="button" id="record-btn">Grabar</button>
+        <button type="button" id="stop-btn" disabled>Detener</button>
+        <audio id="audio-play" controls hidden></audio>
+      </div>
+
+      <label>Ubicación</label>
+      <div class="location-controls">
+        <button type="button" id="get-location">Obtener ubicación</button>
+        <input id="lat" placeholder="Lat" readonly />
+        <input id="lng" placeholder="Lng" readonly />
+      </div>
+
+      <div id="map" class="map"></div>
+
+      <div class="form-actions">
+        <button type="submit" class="cta-button">Enviar reporte</button>
+        <button type="button" id="draft-btn" class="cta-button alt">Guardar borrador</button>
+      </div>
+    </form>
+  </main>
+</body>
+</html>
