@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Saferoad</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- HEADER -->
+    <nav class="topheader">
+      <a href="#" class="logo">
+        <img src="img2/logo.png" alt="Safaroad Logo" height="80" />
+      </a>
+      <ul class="Menu-Horizontal">
+        <li><a href="#">Inicio</a></li>
+        <li><a href="#">Consulta</a></li>
+        <li><a href="#">Mapa</a></li>
+        <li><a href="#">Ayuda</a></li>
+        <li id="user-area">
+          <a href="login.html">
+            <img src="img2/logousuario.png" alt="Usuario" height="30" />
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <img src="img2/logocampana.png" alt="Notificaciones" height="30" />
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- HERO -->
+    <section class="seccion-hero">
+      <div class="hero-texto">
+        <h1>Protege tu camino con Saferoad</h1>
+        <p>
+          Recibe alertas en tiempo real sobre huaycos, derrumbes y otras
+          incidencias en la vía. Mantén a conductores y pasajeros seguros.
+        </p>
+        <a href="login.html"><button class="cta-button">Saber más</button></a>
+      </div>
+      <div class="hero-img">
+        <img src="img2/hero.png" alt="Seguridad en carretera" />
+      </div>
+    </section>
+
+    <!-- SECCION FUNCIONES -->
+    <section class="seccion-servicios">
+      <h2>Nuestras Funciones</h2>
+      <div class="div-general-servicios">
+        <div class="div-servicio">
+          <h3>Alertas de Huaycos</h3>
+          <p>
+            Notificaciones inmediatas sobre huaycos y deslizamientos cercanos.
+          </p>
+        </div>
+        <div class="div-servicio">
+          <h3>Alertas de Derrumbes</h3>
+          <p>Te avisamos sobre derrumbes o zonas inestables en la ruta.</p>
+        </div>
+        <div class="div-servicio">
+          <h3>Alertas de Tráfico y Turbulencias</h3>
+          <p>
+            Recibe información sobre tráfico, condiciones peligrosas y
+            turbulencias.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIOS -->
+    <section class="seccion-testimonios">
+      <h2>Lo que dicen nuestros usuarios</h2>
+      <div class="testimonial">
+        "Gracias a Saferoad, nuestros viajes por la sierra son mucho más
+        seguros."
+      </div>
+      <div class="testimonial">
+        "Alertas precisas y en tiempo real. Nos ha salvado de varias rutas
+        peligrosas."
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section class="seccion-contacto">
+      <h2>Contacto</h2>
+      <form>
+        <input type="text" placeholder="Tu nombre" />
+        <input type="email" placeholder="Tu correo" />
+        <textarea placeholder="Tu mensaje"></textarea>
+        <button type="submit">Enviar</button>
+      </form>
+    </section>
+
+    <!-- SCRIPT -->
+    <script>
+      // Mostrar nombre de usuario si está logueado
+      const user = localStorage.getItem("safaroadUser");
+      const userArea = document.getElementById("user-area");
+
+      if (user) {
+        userArea.innerHTML = `
+          <span class="user-name">👤 ${user}</span>
+          <button id="logout" class="logout-btn">Cerrar sesión</button>
+        `;
+      }
+
+      document.addEventListener("click", (e) => {
+        if (e.target.id === "logout") {
+          localStorage.removeItem("safaroadUser");
+          window.location.href = "index.html";
+        }
+      });
+    </script>
+  </body>
+</html>

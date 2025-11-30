@@ -1,0 +1,283 @@
+/* ====== ESTILOS BASE ====== */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* ====== HEADER ====== */
+.topheader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  height: 70px;
+  background-color: skyblue;
+  flex-wrap: nowrap;
+}
+
+.topheader .logo {
+  flex: 0 0 auto;
+}
+
+.topheader .logo img {
+  max-width: 80px;
+  height: auto;
+}
+
+.Menu-Horizontal {
+  display: flex;
+  gap: 20px;
+  flex: 1 1 auto;
+  justify-content: flex-end;
+}
+
+.Menu-Horizontal li {
+  list-style: none;
+}
+
+.Menu-Horizontal li a {
+  text-decoration: none;
+  color: black;
+  padding: 10px;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.Menu-Horizontal li a:hover {
+  color: red;
+}
+
+/* ====== SUBMENÚ VERTICAL ====== */
+.Menu-Vertical {
+  display: none;
+  position: absolute;
+  list-style: none;
+  background-color: #ccc;
+  margin-top: 10px;
+  padding: 0;
+}
+
+.Menu-Horizontal li:hover .Menu-Vertical {
+  display: block;
+}
+
+.Menu-Vertical li a {
+  display: block;
+  padding: 10px;
+}
+
+/* ====== HERO ====== */
+.seccion-hero {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  padding: 120px 20px 60px 20px;
+  background-color: #f0f0f0;
+  gap: 20px;
+}
+
+.hero-texto {
+  flex: 1;
+  max-width: 500px;
+  margin-right: 20px;
+}
+
+.hero-texto h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.hero-texto p {
+  margin-bottom: 40px;
+  line-height: 1.6;
+}
+
+.cta-button {
+  padding: 12px 25px;
+  background-color: skyblue;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.cta-button:hover {
+  background-color: deepskyblue;
+}
+
+.hero-img {
+  flex: 1;
+  min-width: 300px;
+  text-align: center;
+}
+
+.hero-img img {
+  width: 80%;
+  height: auto;
+}
+
+/* ====== SECCIÓN SERVICIOS ====== */
+.seccion-servicios {
+  padding: 60px 20px;
+  background-color: #fff;
+  text-align: center;
+}
+
+.div-general-servicios {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 40px;
+  flex-wrap: wrap;
+}
+
+.div-servicio {
+  background-color: #eee;
+  padding: 20px;
+  border-radius: 10px;
+  flex: 1 1 250px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* ====== TESTIMONIOS ====== */
+.seccion-testimonios {
+  padding: 60px 20px;
+  background-color: #f0f0f0;
+  text-align: center;
+}
+
+.testimonial {
+  margin: 20px auto;
+  max-width: 500px;
+  font-style: italic;
+}
+
+/* ====== CONTACTO ====== */
+.seccion-contacto {
+  padding: 60px 20px;
+  background-color: #fff;
+  text-align: center;
+}
+
+.seccion-contacto form {
+  background: #f5f5f5;
+  padding: 40px;
+  border-radius: 10px;
+  display: inline-block;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.seccion-contacto input,
+.seccion-contacto textarea {
+  display: block;
+  margin: 10px auto;
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.seccion-contacto button {
+  padding: 10px 20px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: skyblue;
+  color: white;
+  cursor: pointer;
+}
+
+.seccion-contacto button:hover {
+  background-color: #555;
+}
+
+/* ====== NUEVOS ELEMENTOS (USUARIO) ====== */
+.user-name {
+  font-weight: bold;
+  color: #333;
+  margin-right: 10px;
+}
+
+.logout-btn {
+  border: none;
+  background: #ff4444;
+  color: white;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+/* ====== APP HERO ====== */
+.app-hero {
+  background-color: #eaf6ff;
+}
+
+/* ====== INCIDENTES ====== */
+.seccion-incidentes {
+  padding: 60px 20px;
+  background-color: #fff;
+  text-align: center;
+}
+
+.seccion-incidentes h2 {
+  font-size: 2rem;
+  margin-bottom: 40px;
+  color: #333;
+}
+
+.incidente {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  margin: 20px auto;
+  max-width: 900px;
+  background: #f7f7f7;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  flex-wrap: wrap;
+}
+
+.incidente img {
+  width: 200px;
+  border-radius: 10px;
+}
+
+.incidente-info {
+  text-align: left;
+  flex: 1;
+}
+
+.incidente-info h3 {
+  margin: 0 0 10px;
+  color: #0077b6;
+}
+
+.ver-mas {
+  margin-top: 30px;
+}
+
+/* ====== RESPONSIVE ====== */
+@media (max-width: 768px) {
+  .seccion-hero {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .div-general-servicios {
+    flex-direction: column;
+  }
+
+  .hero-texto {
+    margin-right: 0;
+  }
+
+  .hero-img img {
+    width: 100%;
+  }
+}

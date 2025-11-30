@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Iniciar sesión - Saferoad</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <section class="seccion-contacto">
+      <h2>Iniciar sesión</h2>
+      <form id="login-form">
+        <input type="text" id="username" placeholder="Usuario" required />
+        <input
+          type="password"
+          id="password"
+          placeholder="Contraseña"
+          required
+        />
+        <button type="submit">Ingresar</button>
+        <p>¿No tienes cuenta? <a href="register.html">Regístrate</a></p>
+      </form>
+    </section>
+
+    <script>
+      document
+        .getElementById("login-form")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          const user = document.getElementById("username").value.trim();
+          const pass = document.getElementById("password").value.trim();
+
+          const savedPass = localStorage.getItem(user);
+          if (savedPass && savedPass === pass) {
+            localStorage.setItem("safaroadUser", user);
+            window.location.href = "app.html";
+          } else {
+            alert("❌ Usuario o contraseña incorrectos.");
+          }
+        });
+    </script>
+  </body>
+</html>

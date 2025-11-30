@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Safaroad App</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <nav class="topheader">
+      <a href="#" class="logo">
+        <img src="img2/logo.png" alt="Safaroad Logo" height="80" />
+      </a>
+      <ul class="Menu-Horizontal">
+        <li><a href="#">Inicio</a></li>
+        <li><a href="#">Consulta</a></li>
+        <li><a href="#">Mapa</a></li>
+        <li><a href="#">Ayuda</a></li>
+        <li id="user-area"></li>
+      </ul>
+    </nav>
+
+    <!-- SECCIÓN HERO BIENVENIDA -->
+    <section class="seccion-hero app-hero">
+      <div class="hero-texto">
+        <h1>Bienvenido a Safaroad</h1>
+        <p>
+          Gestiona tus alertas y mantente informado sobre los incidentes más
+          recientes en las carreteras. La seguridad comienza contigo.
+        </p>
+      </div>
+      <div class="hero-img">
+        <img src="img2/app-hero.png" alt="Panel Saferoad" />
+      </div>
+    </section>
+
+    <!-- SECCIÓN DE INCIDENTES -->
+    <section class="seccion-incidentes">
+      <h2>Alertas recientes</h2>
+
+      <div class="incidente">
+        <img src="img2/huayco.jpg" alt="Huayco" />
+        <div class="incidente-info">
+          <h3>Huayco detectado</h3>
+          <p><strong>Ubicación:</strong> Carretera Central - km 45</p>
+          <p><strong>Fecha:</strong> 4 de noviembre, 2025 - 08:30 a.m.</p>
+        </div>
+      </div>
+
+      <div class="incidente">
+        <img src="img2/derrumbe.jpg" alt="Derrumbe" />
+        <div class="incidente-info">
+          <h3>Derrumbe moderado</h3>
+          <p><strong>Ubicación:</strong> Cusco - Ollantaytambo</p>
+          <p><strong>Fecha:</strong> 3 de noviembre, 2025 - 5:10 p.m.</p>
+        </div>
+      </div>
+
+      <div class="incidente">
+        <img src="img2/turbulencia.jpg" alt="Turbulencia" />
+        <div class="incidente-info">
+          <h3>Turbulencia en carretera</h3>
+          <p><strong>Ubicación:</strong> Arequipa - Yura</p>
+          <p><strong>Fecha:</strong> 3 de noviembre, 2025 - 9:00 p.m.</p>
+        </div>
+      </div>
+
+      <div class="ver-mas">
+        <button class="cta-button">Ver más</button>
+      </div>
+    </section>
+
+    <script>
+      const user = localStorage.getItem("safaroadUser");
+      const userArea = document.getElementById("user-area");
+
+      if (user) {
+        userArea.innerHTML = `
+          <span class="user-name">👤 ${user}</span>
+          <button id="logout" class="logout-btn">Cerrar sesión</button>
+        `;
+      } else {
+        window.location.href = "login.html";
+      }
+
+      document.addEventListener("click", (e) => {
+        if (e.target.id === "logout") {
+          localStorage.removeItem("saferoadUser");
+          window.location.href = "index.html";
+        }
+      });
+    </script>
+  </body>
+</html>

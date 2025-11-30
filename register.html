@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registro - Saferoad</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <section class="seccion-contacto">
+      <h2>Crear cuenta</h2>
+      <form id="register-form">
+        <input
+          type="text"
+          id="username"
+          placeholder="Nombre de usuario"
+          required
+        />
+        <input
+          type="password"
+          id="password"
+          placeholder="Contraseña"
+          required
+        />
+        <button type="submit">Registrarse</button>
+        <p>¿Ya tienes una cuenta? <a href="login.html">Inicia sesión</a></p>
+      </form>
+    </section>
+
+    <script>
+      document
+        .getElementById("register-form")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          const user = document.getElementById("username").value.trim();
+          const pass = document.getElementById("password").value.trim();
+
+          if (localStorage.getItem(user)) {
+            alert("⚠️ Este usuario ya existe. Intenta con otro.");
+          } else {
+            localStorage.setItem(user, pass);
+            alert("✅ Registro exitoso. Ahora inicia sesión.");
+            window.location.href = "login.html";
+          }
+        });
+    </script>
+  </body>
+</html>
